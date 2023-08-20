@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP FETCH</title>
+</head>
+
+<body>
+
+    <h1>TP FETCH</h1>
+    <br>
+    <img id="imagenMuestra" src="#" alt="Imagen de muestra">
+
+    <script>
+        // URL de la imagen de muestra
+        const imageUrl = "https://via.placeholder.com/150";
+
+        // Elemento de la imagen en el HTML
+        const imagenElement = document.getElementById("imagenMuestra");
+
+        // Realizar la solicitud GET usando fetch
+        fetch(imageUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al obtener la imagen. Código: ${response.status}`);
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Crear una URL a partir del objeto Blob para la imagen
+                const imageUrl = URL.createObjectURL(blob);
+
+                // Establecer la URL como fuente de la imagen
+                imagenElement.src = imageUrl;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+    </script>
+
+</body>
+
+</html>
